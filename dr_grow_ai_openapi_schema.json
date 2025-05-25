@@ -1,0 +1,146 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Dr. Grow.AI",
+    "version": "1.0.0",
+    "description": "Funções especializadas para cultivo, diagnóstico visual, extração e orientação técnica em Cannabis."
+  },
+  "servers": [
+    {
+      "url": "https://wall1993-lab.github.io/dr-grow-ai-schema"
+    }
+  ],
+  "paths": {
+    "/diagnostico_imagem": {
+      "post": {
+        "operationId": "diagnostico_imagem",
+        "description": "Analisa uma imagem da planta de Cannabis enviada pelo usuário e fornece um diagnóstico visual do estado da planta.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imagem_url": {
+                    "type": "string",
+                    "description": "URL ou descrição da imagem da planta enviada."
+                  },
+                  "fase_cultivo": {
+                    "type": "string",
+                    "description": "Fase atual do cultivo (vegetativo, floração, etc.)."
+                  }
+                },
+                "required": [
+                  "imagem_url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Diagnóstico visual da planta realizado com sucesso."
+          }
+        }
+      }
+    },
+    "/calcular_setup": {
+      "post": {
+        "operationId": "calcular_setup",
+        "description": "Recebe as dimensões do grow, tipo de vaso e imagens dos equipamentos e orienta sobre o melhor manejo e tempo estimado de cultivo.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "largura_cm": {
+                    "type": "number"
+                  },
+                  "altura_cm": {
+                    "type": "number"
+                  },
+                  "profundidade_cm": {
+                    "type": "number"
+                  },
+                  "tipo_vaso": {
+                    "type": "string"
+                  },
+                  "imagem_equipamentos_url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "largura_cm",
+                  "altura_cm",
+                  "profundidade_cm",
+                  "tipo_vaso"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Setup analisado e orientações fornecidas com sucesso."
+          }
+        }
+      }
+    },
+    "/consultar_extracao": {
+      "post": {
+        "operationId": "consultar_extracao",
+        "description": "Orienta sobre o método de extração ideal com base na finalidade, tipo de planta e equipamento disponível.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "objetivo": {
+                    "type": "string",
+                    "description": "Finalidade da extração (ex: medicinal, recreativa, culinária)."
+                  },
+                  "forma_planta": {
+                    "type": "string",
+                    "description": "Tipo de material vegetal (flores frescas, secas, hash, etc.)."
+                  },
+                  "equipamentos": {
+                    "type": "string",
+                    "description": "Equipamentos disponíveis para extração."
+                  }
+                },
+                "required": [
+                  "objetivo",
+                  "forma_planta"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Método de extração recomendado com sucesso."
+          }
+        }
+      }
+    },
+    "/consulta_legal": {
+      "post": {
+        "operationId": "consulta_legal",
+        "description": "Fornece informações gerais e atualizadas sobre aspectos legais do cultivo e uso da Cannabis, conforme legislação brasileira.",
+        "requestBody": {
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Informações legais fornecidas com sucesso."
+          }
+        }
+      }
+    }
+  }
+}
